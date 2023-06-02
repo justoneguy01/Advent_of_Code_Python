@@ -28,7 +28,8 @@ For example:
 
 What is the solution to your captcha?
 """
-def solve(num_STR):
+#part1
+def solve_part1(num_STR):
     answer=0
     for i in range(0,len(num_STR)):
         if i!=len(num_STR)-1 and num_STR[i]==num_STR[i+1]:
@@ -37,6 +38,17 @@ def solve(num_STR):
             answer=answer+int(num_STR[i])
     return answer
 
+def solve_part2(num_STR):
+    answer=0
+    distance=int(len(num_STR)/2)
+    for i in range(0,len(num_STR)):
+            if i+distance<len(num_STR) and num_STR[i]==num_STR[i+distance]:
+                answer=answer+int(num_STR[i])
+            elif i+distance>=len(num_STR):
+                tmp=(i+distance)-len(num_STR)
+                if num_STR[i]==num_STR[tmp]:
+                    answer=answer+int(num_STR[i])
+    return answer
 def main():
     logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s',datefmt='%Y.%m.%d %H:%M:%S')
     logger = logging.getLogger()
@@ -46,10 +58,36 @@ def main():
         for i in file:
             num_str=num_str+i
     logger.info('Finished reading the input.txt')
-    logger.info('The result is %s.', solve(num_str))
+    logger.info('The result for part1 is %s.', solve_part1(num_str))
+    """
+    That's the right answer! You are one gold star closer to debugging the printer. [Continue to Part Two]
+
+    The first half of this puzzle is complete! It provides one gold star: *
+
+    --- Part Two ---
+    You notice a progress bar that jumps to 50% completion. Apparently, the door isn't yet satisfied, but it did emit a star as encouragement. The instructions change:
+
+    Now, instead of considering the next digit, it wants you to consider the digit halfway around the circular list. That is, if your list contains 10 items, only include a digit in your sum if the digit 10/2 = 5 steps forward matches it. Fortunately, your list has an even number of elements.
+
+    For example:
+
+    1212 produces 6: the list contains 4 items, and all four digits match the digit 2 items ahead.
+    1221 produces 0, because every comparison is between a 1 and a 2.
+    123425 produces 4, because both 2s match each other, but no other digit has a match.
+    123123 produces 12.
+    12131415 produces 4.
+    What is the solution to your new captcha?
+    """
+    logger.info('The result for part2 is %s.', solve_part2(num_str))
+    """
+    That's the right answer! You are one gold star closer to debugging the printer.
+
+    You have completed Day 1! You can [Share] this victory or [Return to Your Advent Calendar].
+    
+    Both parts of this puzzle are complete! They provide two gold stars: **
+    
+    """
     logger.info('The program closing...')
-    """
-        That's the right answer! You are one gold star closer to debugging the printer. [Continue to Part Two]
-    """
+
 if __name__ == "__main__":
     main()
