@@ -28,7 +28,6 @@ For example:
 
 What is the solution to your captcha?
 """
-#part1
 def solve_part1(num_STR):
     answer=0
     for i in range(0,len(num_STR)):
